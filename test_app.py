@@ -1,5 +1,5 @@
 import pytest
-from app import validate_username, create_profile_message
+from app import validate_username, create_profile_message, generate_reset_code
 
 
 def test_valid_username():
@@ -22,3 +22,13 @@ def test_profile_message():
 def test_invalid_role():
     with pytest.raises(ValueError):
         create_profile_message("student_01", "superuser")
+
+
+def test_reset_code_length():
+    code = generate_reset_code()
+    assert len(code) == 6
+    assert code.isdigit()
+
+
+def test_reset_code_is_string():
+    assert isinstance(generate_reset_code(), str)

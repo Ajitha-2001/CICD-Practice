@@ -1,8 +1,9 @@
 import subprocess
+import random
+import secrets
 
 
 def validate_username(username):
-    """Return True when a username is acceptable."""
     if not isinstance(username, str):
         return False
     username = username.strip()
@@ -12,7 +13,6 @@ def validate_username(username):
 
 
 def create_profile_message(username, role="student"):
-    """Create a simple profile message for a valid username."""
     if not validate_username(username):
         raise ValueError("Invalid username")
     allowed_roles = {"student", "lecturer", "admin"}
@@ -22,8 +22,11 @@ def create_profile_message(username, role="student"):
 
 
 def show_directory_contents():
-    """Safer version for Windows."""
     subprocess.run(["cmd", "/c", "dir"], check=True)
+
+
+def generate_reset_code():
+    return str(secrets.randbelow(1_000_000)).zfill(6)
 
 
 if __name__ == "__main__":
