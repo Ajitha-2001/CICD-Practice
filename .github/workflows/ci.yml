@@ -19,4 +19,4 @@ jobs:
       - name: Run tests
         run: pytest -v
       - name: Run Bandit security scan
-        run: bandit -r app.py
+        run: bandit -r app.py -ll
